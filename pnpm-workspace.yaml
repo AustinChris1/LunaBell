@@ -1,0 +1,8 @@
+
+# pnpm 11 reads these here, not from the package.json "pnpm" field
+onlyBuiltDependencies:
+  - esbuild
+
+# the environment enforces a release-age cooldown on fresh publishes
+overrides:
+  electron-to-chromium: 1.5.417

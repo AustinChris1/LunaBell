@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* light is the Nimiq Pay palette, dark is the LunaBell night */
+  :root {
+    --bg: #f4f4f4;
+    --surface: #ffffff;
+    --raised: #ebecf1;
+    --line: #dcdee6;
+    --ink: #1f2348;
+    --muted: #6b6f8c;
+    --faint: #9599b0;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: #070912;
+    --surface: #12162a;
+    --raised: #1b2039;
+    --line: #272c47;
+    --ink: #eef1fb;
+    --muted: #9aa1bf;
+    --faint: #6d7495;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    background-color: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-ui), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overscroll-behavior-y: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+@layer components {
+  /* the identicon svg is fixed size, so it needs centring in text-align blocks */
+  .identicon {
+    margin-inline: auto;
+  }
+  .identicon svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+  }
+}
