@@ -7,7 +7,7 @@ pnpm install
 pnpm dev
 ```
 
-Open http://localhost:3000.
+Open http://localhost:3000, or use the live build at https://lunabell.vercel.app.
 
 ## Automated
 
@@ -89,8 +89,8 @@ The parts that only exist in the host app:
 Open a deployed build with either share form:
 
 ```
-nimiqpay://miniapp?url=your-app.vercel.app
-https://nimpay.app/miniapps/open/your-app.vercel.app
+nimiqpay://miniapp?url=lunabell.vercel.app
+https://nimpay.app/miniapps/open/lunabell.vercel.app
 ```
 
 Opening `/` inside Nimiq Pay forwards to `/app` automatically.

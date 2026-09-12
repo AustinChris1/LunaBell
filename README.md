@@ -9,6 +9,9 @@ every time anyone opens it.
 
 Built for the Nimiq Mini Apps Competition, Cycle II.
 
+**Live:** https://lunabell.vercel.app  
+**Open in Nimiq Pay:** https://nimpay.app/miniapps/open/lunabell.vercel.app
+
 ## The problem
 
 The fake payment screenshot. A customer shows a "sent" screen, walks off, and
@@ -69,7 +72,7 @@ one tap. Nothing leaves the device and there is still no database.
 Any site, QR or Mini App can open LunaBell with a charge already filled in:
 
 ```
-https://your-app.vercel.app/app?amount=12.5&unit=usd&memo=Table%204&to=NQ...
+https://lunabell.vercel.app/app?amount=12.5&unit=usd&memo=Table%204&to=NQ...
 ```
 
 | Parameter | Meaning |
@@ -156,8 +159,8 @@ Submission copy and the demo shot list live in [SUBMISSION.md](SUBMISSION.md).
 Point a Mini App at the deployed origin with either share form:
 
 ```
-nimiqpay://miniapp?url=your-app.vercel.app
-https://nimpay.app/miniapps/open/your-app.vercel.app
+nimiqpay://miniapp?url=lunabell.vercel.app
+https://nimpay.app/miniapps/open/lunabell.vercel.app
 ```
 
 ## Layout
