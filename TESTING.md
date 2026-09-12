@@ -51,13 +51,12 @@ Nothing here needs NIM. The app runs in any browser in web preview.
 | 15 | Open `/r/fbd90226a2c146bf63560a5fb57190afbdff43b26c251572105fc9ece1a3d87f` | A real receipt. Watch confirmations climb |
 | 16 | Reload it | Higher confirmation count than a moment ago |
 | 17 | Open `/r/` + 64 letter f's | "No such payment" |
-| 18 | Open `/mark-test` | The logo on both grounds at 64, 32, 24 and 16px |
-| 19 | Press **Test the bell** | Chime then a spoken sample amount, before any real money |
-| 20 | Open `/app?amount=7.5&memo=Table%204&to=NQ...` | Amount and memo already filled in |
-| 21 | After a ring, look under the pad | **Today** with a running total and a count |
-| 22 | Expand it, press **Say the total** | Speaks what you took today |
-| 23 | Press the repeat arrow on a row | Same amount and memo loaded, ready to listen again |
-| 24 | Install to home screen | Opens fullscreen on `/app` |
+| 18 | Press **Test the bell** | Chime then a spoken sample amount, before any real money |
+| 19 | Open `/app?amount=7.5&memo=Table%204&to=NQ...` | Amount and memo already filled in |
+| 20 | After a ring, look under the pad | **Today** with a running total and a count |
+| 21 | Expand it, press **Say the total** | Speaks what you took today |
+| 22 | Press the repeat arrow on a row | Same amount and memo loaded, ready to listen again |
+| 23 | Install to home screen | Opens fullscreen on `/app` |
 
 Step 16 is the whole product argument: a screenshot of step 15 cannot do what
 step 16 does.

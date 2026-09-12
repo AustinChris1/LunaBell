@@ -137,11 +137,17 @@ what can be checked without a wallet and what cannot.
 ## Deploy
 
 Vercel, zero configuration. No database and no environment variables are
-required.
+required. One click from the repo:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AustinChris1/LunaBell)
+
+Or from a terminal:
 
 ```bash
 npx vercel --prod
 ```
+
+Submission copy and the demo shot list live in [SUBMISSION.md](SUBMISSION.md).
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
