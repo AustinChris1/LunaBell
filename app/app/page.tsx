@@ -11,6 +11,7 @@ import { PayQr } from '@/components/PayQr'
 import { StatusBar } from '@/components/StatusBar'
 import { TakingsPanel } from '@/components/Takings'
 import { ThemeToggle } from '@/components/Theme'
+import { OpenInPay } from '@/components/OpenInPay'
 import { useT } from '@/components/T'
 import {
   type Charge,
@@ -350,14 +351,7 @@ function MiniApp() {
             >
               {t('listen')}
             </button>
-            {!nimiq.inHost && (
-              <a
-                className="mt-2.5 block text-center text-[13px] font-bold text-sky"
-                href={payDeeplink()}
-              >
-                {t('openInNimiqPay')}
-              </a>
-            )}
+            {!nimiq.inHost && <OpenInPay className="mt-2.5" />}
           </div>
         </section>
       )}
@@ -482,10 +476,6 @@ function Row({ label, value, mono }: { label: string; value: string; mono?: bool
   )
 }
 
-function payDeeplink(): string {
-  if (typeof window === 'undefined') return 'https://nimpay.app/miniapps/open/'
-  return 'https://nimpay.app/miniapps/open/' + window.location.host
-}
 
 export default function AppPage() {
   return (

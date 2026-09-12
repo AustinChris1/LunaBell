@@ -89,9 +89,14 @@ The parts that only exist in the host app:
 Open a deployed build with either share form:
 
 ```
-nimiqpay://miniapp?url=lunabell.vercel.app
-https://nimpay.app/miniapps/open/lunabell.vercel.app
+nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app
 ```
+
+The `https://nimpay.app/miniapps/open/lunabell.vercel.app` form only works once
+LunaBell is in the public directory (`nimiq/awesome`); until then that page returns
+"Unknown mini app host". The in app **Open in Nimiq Pay** buttons use the same
+platform launches as the official site (an `intent://` App Link on Android, the
+`nimiqpay://` scheme on iOS) and do not depend on the directory.
 
 Opening `/` inside Nimiq Pay forwards to `/app` automatically.
 

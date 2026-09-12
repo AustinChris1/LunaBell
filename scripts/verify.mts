@@ -58,3 +58,14 @@ ok('failed execution does not match', matchCharge([{ ...base, executionResult: f
 ok('plain-text tag also accepted', readTag({ ...base, recipientData: tag }) === tag)
 
 console.log('\nspec: a charge rings only for its own tag, exact amount, correct recipient, after creation.')
+
+// deeplinks must match the official nimpay.app builders so launches behave identically
+const { buildAndroidIntentUrl, buildIosCustomSchemeUrl, buildOpenPath } = await import('../lib/deeplink.ts')
+const target = 'https://lunabell.vercel.app/pay?c=abc;def#frag'
+ok('open path keeps host, path and query', buildOpenPath('https://lunabell.vercel.app/pay?c=abc') === '/miniapps/open/lunabell.vercel.app/pay?c=abc')
+ok('open path drops a bare trailing slash', buildOpenPath('https://lunabell.vercel.app/') === '/miniapps/open/lunabell.vercel.app')
+const android = buildAndroidIntentUrl(target)
+ok('android intent targets the nimpay.app App Link host', android.startsWith('intent://nimpay.app/miniapps/open/lunabell.vercel.app/pay?c=abc'))
+ok('android intent escapes ; and # inside the path', android.includes('%3Bdef') && !android.split('#Intent')[0].includes('#frag'))
+ok('android intent names the Pay package and a store fallback', android.includes('package=com.nimiq.pay') && android.includes('S.browser_fallback_url=https%3A%2F%2Fplay.google.com'))
+ok('ios scheme carries the full encoded url', buildIosCustomSchemeUrl('https://lunabell.vercel.app/pay?c=abc') === 'nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app%2Fpay%3Fc%3Dabc')

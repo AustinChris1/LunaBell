@@ -10,7 +10,7 @@ every time anyone opens it.
 Built for the Nimiq Mini Apps Competition, Cycle II.
 
 **Live:** https://lunabell.vercel.app  
-**Open in Nimiq Pay:** https://nimpay.app/miniapps/open/lunabell.vercel.app
+**Open in Nimiq Pay:** open the live URL on your phone and tap Open in Nimiq Pay, or use `nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app`
 
 ## The problem
 
@@ -159,9 +159,14 @@ Submission copy and the demo shot list live in [SUBMISSION.md](SUBMISSION.md).
 Point a Mini App at the deployed origin with either share form:
 
 ```
-nimiqpay://miniapp?url=lunabell.vercel.app
-https://nimpay.app/miniapps/open/lunabell.vercel.app
+nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app
 ```
+
+The `https://nimpay.app/miniapps/open/lunabell.vercel.app` form only works once
+LunaBell is in the public directory (`nimiq/awesome`); until then that page returns
+"Unknown mini app host". The in app **Open in Nimiq Pay** buttons use the same
+platform launches as the official site (an `intent://` App Link on Android, the
+`nimiqpay://` scheme on iOS) and do not depend on the directory.
 
 ## Layout
 

@@ -22,7 +22,7 @@ MIT. NIM native. Built to be trusted with your hands full.
 
 - Repo: https://github.com/AustinChris1/LunaBell
 - Live: https://lunabell.vercel.app
-- Open in Nimiq Pay: https://nimpay.app/miniapps/open/lunabell.vercel.app
+- Open in Nimiq Pay: open https://lunabell.vercel.app on a phone and tap Open in Nimiq Pay (the nimpay.app/miniapps/open link 404s until the directory PR merges)
 - Demo video: (link once recorded)
 
 ## Demo video shot list (about 40 seconds)

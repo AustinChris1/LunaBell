@@ -6,6 +6,7 @@ import { LunaBellMark, LunaBellWordmark } from '@/components/Logo'
 import { Identicon } from '@/components/Identicon'
 import { StatusBar } from '@/components/StatusBar'
 import { ThemeToggle } from '@/components/Theme'
+import { OpenInPay } from '@/components/OpenInPay'
 import { type Charge, chargeData, decodeCharge, prettyAddress } from '@/lib/charge'
 import { formatFiat, formatLuna, formatNim, lunaToNim } from '@/lib/format'
 import { useNimiq } from '@/lib/useNimiq'
@@ -114,9 +115,7 @@ function PayView() {
           </button>
         ) : (
           <div className="mt-4">
-            <a href={'nimiqpay://miniapp?url=' + encodeURIComponent(currentUrl())}>
-              <button className={PRIMARY}>{t('openInNimiqPay')}</button>
-            </a>
+            <OpenInPay variant="button" />
             <p className="mt-3 text-center text-[13px] text-muted">
               {t('payingHappens')}
             </p>
@@ -154,9 +153,6 @@ function Row({ label, value }: { label: string; value: string }) {
   )
 }
 
-function currentUrl(): string {
-  return typeof window === 'undefined' ? '' : window.location.href
-}
 
 export default function PayPage() {
   return (
