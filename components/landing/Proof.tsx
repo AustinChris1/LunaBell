@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
+import { EASE_OUT } from './Pieces'
 import { CheckCheck, ImageOff, Lock, RefreshCw } from 'lucide-react'
 
 // A real mainnet transaction, so the confirmation count on this page is genuine.
@@ -37,13 +38,13 @@ export function Proof() {
   return (
     <div className="mx-auto grid max-w-4xl gap-5 px-5 sm:grid-cols-2">
       <motion.div
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, transform: 'translateX(-20px)' }}
+        whileInView={{ opacity: 1, transform: 'translateX(0px)' }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: EASE_OUT }}
         className="relative overflow-hidden rounded-3xl border border-line bg-surface p-6"
       >
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-danger/30 bg-danger/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-danger">
+        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-danger/30 bg-danger/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-dangerText">
           <ImageOff className="h-3.5 w-3.5" strokeWidth={2} />
           A screenshot
         </div>
@@ -63,13 +64,13 @@ export function Proof() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, x: 20 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        initial={{ opacity: 0, transform: 'translateX(20px)' }}
+        whileInView={{ opacity: 1, transform: 'translateX(0px)' }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, delay: 0.08, ease: EASE_OUT }}
         className="relative overflow-hidden rounded-3xl border border-mint/25 bg-gradient-to-b from-mint/[0.09] to-transparent p-6"
       >
-        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-mint">
+        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-mint/30 bg-mint/10 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-success">
           <CheckCheck className="h-3.5 w-3.5" strokeWidth={2} />
           A LunaBell receipt
         </div>
@@ -88,7 +89,7 @@ export function Proof() {
         </div>
 
         <div className="mt-6 flex items-center gap-2 rounded-2xl border border-mint/20 bg-bg px-4 py-3 text-[13px] text-muted">
-          <RefreshCw className="h-4 w-4 shrink-0 text-mint" strokeWidth={1.75} />
+          <RefreshCw className="h-4 w-4 shrink-0 text-success" strokeWidth={1.75} />
           Climbing while you read this. Re-read from Nimiq every five seconds.
         </div>
       </motion.div>
@@ -112,10 +113,10 @@ function Row({
       <span className="text-[13px] text-faint">{label}</span>
       <motion.span
         key={live ? pulseKey : undefined}
-        initial={live ? { opacity: 0.3, y: -3 } : false}
-        animate={live ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.55, ease: 'easeOut' }}
-        className={'font-mono text-sm ' + (live ? 'text-mint' : 'text-ink')}
+        initial={live ? { opacity: 0.3, transform: 'translateY(-3px)' } : false}
+        animate={live ? { opacity: 1, transform: 'translateY(0px)' } : undefined}
+        transition={{ duration: 0.3, ease: EASE_OUT }}
+        className={'font-mono text-sm tabular-nums ' + (live ? 'text-success' : 'text-ink')}
       >
         {value}
       </motion.span>

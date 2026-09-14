@@ -3,15 +3,21 @@
 @tailwind utilities;
 
 @layer base {
-  /* light is the Nimiq Pay palette, dark is the LunaBell night */
+  /* light is the Nimiq Pay palette, dark is the LunaBell night; every text token clears 4.5:1 on all three surfaces */
   :root {
     --bg: #f4f4f4;
     --surface: #ffffff;
     --raised: #ebecf1;
     --line: #dcdee6;
     --ink: #1f2348;
-    --muted: #6b6f8c;
-    --faint: #9599b0;
+    --muted: #656884;
+    --faint: #686a7a;
+    --accent: #946012;
+    --link: #0470ae;
+    --success: #157769;
+    --danger-text: #c03c2c;
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     color-scheme: light;
   }
 
@@ -22,7 +28,11 @@
     --line: #272c47;
     --ink: #eef1fb;
     --muted: #9aa1bf;
-    --faint: #6d7495;
+    --faint: #8288a4;
+    --accent: #f0b429;
+    --link: #2290d0;
+    --success: #21bca5;
+    --danger-text: #df6354;
     color-scheme: dark;
   }
 
@@ -38,11 +48,51 @@
     font-family: var(--font-ui), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     overscroll-behavior-y: none;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    caret-color: var(--accent);
+  }
+
+  ::selection {
+    background: rgb(233 178 19 / 0.32);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* reduced motion keeps opacity and colour, drops travel and rotation */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-sway,
+    .animate-ring,
+    .animate-shimmer,
+    .animate-ping,
+    .animate-live {
+      animation: none;
+    }
+    .animate-rise {
+      animation-name: fade;
+    }
+    .press:active {
+      transform: none;
+    }
   }
 }
 
 @layer components {
+  /* every pressable element answers the finger the same way */
+  .press {
+    transition-property: transform, background-color, border-color, color, opacity;
+    transition-duration: 160ms;
+    transition-timing-function: var(--ease-out);
+  }
+  .press:active {
+    transform: scale(0.97);
+  }
+  .press:disabled:active {
+    transform: none;
+  }
+
   /* the identicon svg is fixed size, so it needs centring in text-align blocks */
   .identicon {
     margin-inline: auto;

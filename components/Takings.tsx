@@ -57,7 +57,7 @@ export function TakingsPanel({
           <p className="text-[11px] font-bold uppercase tracking-[0.09em] text-faint">
             {t('today')} · {today.length}
           </p>
-          <p className="font-display text-[22px] font-bold leading-tight text-ink">
+          <p className="font-display text-[22px] font-bold leading-tight tabular-nums text-ink">
             {formatNim(total)} NIM
           </p>
           {rate !== null && (
@@ -65,18 +65,18 @@ export function TakingsPanel({
           )}
         </div>
         <ChevronDown
-          className={'h-4 w-4 shrink-0 text-faint transition ' + (open ? 'rotate-180' : '')}
+          className={'h-4 w-4 shrink-0 text-faint transition-transform ' + (open ? 'rotate-180' : '')}
           strokeWidth={2}
         />
       </button>
 
       {open && (
-        <div className="border-t border-line">
+        <div className="animate-rise border-t border-line">
           <ul className="max-h-64 overflow-y-auto">
             {today.map((entry) => (
               <li key={entry.hash} className="flex items-center gap-2 border-b border-line px-4 py-2.5 last:border-0">
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-bold text-ink">{formatNim(entry.value)} NIM</p>
+                  <p className="text-sm font-bold tabular-nums text-ink">{formatNim(entry.value)} NIM</p>
                   <p className="truncate text-[12px] text-muted">
                     {entry.memo || t('paidAt')} ·{' '}
                     {new Date(entry.at).toLocaleTimeString(undefined, {
@@ -87,7 +87,7 @@ export function TakingsPanel({
                 </div>
                 <a
                   href={'/r/' + entry.hash}
-                  className="rounded-full border border-line px-2.5 py-1.5 text-[11px] font-bold text-muted"
+                  className="press inline-flex min-h-[44px] items-center rounded-full border border-line px-3 text-[12px] font-bold text-muted"
                 >
                   {t('receipt')}
                 </a>
@@ -95,7 +95,7 @@ export function TakingsPanel({
                   type="button"
                   onClick={() => onRepeat(entry.value, entry.memo)}
                   aria-label={t('repeat')}
-                  className="grid h-8 w-8 place-items-center rounded-full border border-line text-muted transition active:bg-surface"
+                  className="press grid h-11 w-11 place-items-center rounded-full border border-line text-muted active:bg-surface"
                 >
                   <RotateCcw className="h-3.5 w-3.5" strokeWidth={2} />
                 </button>
@@ -107,7 +107,7 @@ export function TakingsPanel({
             <button
               type="button"
               onClick={speakTotal}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-line px-3 py-2.5 text-[13px] font-bold text-ink"
+              className="press inline-flex min-h-[44px] flex-1 items-center justify-center gap-2 rounded-xl border border-line px-3 text-[13px] font-bold text-ink"
             >
               <Volume2 className="h-3.5 w-3.5" strokeWidth={2} />
               {t('sayTotal')}
@@ -118,7 +118,7 @@ export function TakingsPanel({
                 clearTakings()
                 setList([])
               }}
-              className="rounded-xl border border-line px-3 py-2.5 text-[13px] font-bold text-muted"
+              className="press min-h-[44px] rounded-xl border border-line px-3 text-[13px] font-bold text-muted"
             >
               {t('clearHistory')}
             </button>

@@ -44,7 +44,7 @@ export function LunaBellMark({ size = 32, className }: { size?: number; classNam
 
 export function LunaBellWordmark({ size = 26 }: { size?: number }) {
   return (
-    <span className="inline-flex items-center gap-2 font-display text-[21px] tracking-tight text-goldDeep">
+    <span className="inline-flex items-center gap-2 font-display text-[21px] tracking-tight text-accent">
       <LunaBellMark size={size} />
       <span className="text-ink">
         Luna<strong className="font-bold">Bell</strong>

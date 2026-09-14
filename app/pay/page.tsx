@@ -14,7 +14,7 @@ import { useT } from '@/components/T'
 
 const CARD = 'rounded-[18px] border border-line bg-surface p-5'
 const PRIMARY =
-  'w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)] transition active:translate-y-px disabled:opacity-40'
+  'press w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)] disabled:opacity-40'
 
 function PayView() {
   const params = useSearchParams()
@@ -82,7 +82,7 @@ function PayView() {
         <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-faint">
           {t('askedToPay')}
         </p>
-        <p className="mt-2 font-display text-[42px] font-bold leading-none tracking-tight text-ink">
+        <p className="mt-2 font-display text-[42px] font-bold leading-none tracking-tight tabular-nums text-ink">
           {formatNim(charge.v)} NIM
         </p>
         <p className="mt-1.5 font-mono text-xs text-muted">{formatLuna(charge.v)}</p>
@@ -102,7 +102,7 @@ function PayView() {
 
         {status === 'sent' ? (
           <div className="mt-4 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-mint/40 bg-mint/15 px-3 py-1.5 text-xs font-bold text-mint">
+            <span className="inline-flex items-center gap-2 rounded-full border border-success/40 bg-success/10 px-3 py-1.5 text-xs font-bold text-success">
               {t('sent')}
             </span>
             <p className="mt-3 text-[13px] text-muted">
@@ -122,7 +122,7 @@ function PayView() {
           </div>
         )}
 
-        {status === 'error' && <p className="mt-3 text-center text-[13px] text-danger">{message}</p>}
+        {status === 'error' && <p className="mt-3 text-center text-[13px] text-dangerText">{message}</p>}
       </section>
 
       <p className="mt-auto pt-6 text-center text-xs leading-relaxed text-faint">

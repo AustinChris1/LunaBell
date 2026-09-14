@@ -33,12 +33,12 @@ const NIM_CHIPS = ['1', '5', '10', '25']
 
 const CARD = 'rounded-[18px] border border-line bg-surface p-5'
 const GHOST =
-  'w-full rounded-2xl border border-line px-4 py-3.5 text-sm font-bold text-ink transition active:bg-raised'
+  'press w-full rounded-2xl border border-line px-4 py-3.5 text-sm font-bold text-ink active:bg-raised'
 const PRIMARY =
-  'w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)] transition active:translate-y-px disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none'
+  'press w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)] disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none'
 const LABEL = 'mb-2 block text-[11px] font-bold uppercase tracking-[0.09em] text-faint'
 const INPUT =
-  'w-full rounded-xl border border-line bg-bg px-3.5 py-3.5 text-ink outline-none transition placeholder:text-faint focus:border-gold focus:ring-2 focus:ring-gold/25'
+  'w-full rounded-xl border border-line bg-bg px-3.5 py-3.5 text-ink outline-none transition-[border-color,box-shadow] placeholder:text-faint focus:border-gold focus:ring-2 focus:ring-gold/25'
 
 type Stage = 'compose' | 'live'
 
@@ -249,14 +249,14 @@ function MiniApp() {
       {stage === 'compose' && (
         <section className={CARD}>
           <div className="px-2 pb-1 pt-2 text-center">
-            <div className="text-sm font-bold uppercase tracking-[0.14em] text-goldDeep">
+            <div className="text-sm font-bold uppercase tracking-[0.14em] text-accent">
               {unit === 'nim' ? 'NIM' : unit.toUpperCase()}
             </div>
-            <p className="mt-1 font-display text-[52px] font-extrabold leading-none tracking-tight text-ink">
+            <p className="mt-1 font-display text-[52px] font-extrabold leading-none tracking-tight tabular-nums text-ink">
               {figure}
             </p>
             {fiatLine && <p className="mt-1.5 text-sm text-muted">{fiatLine}</p>}
-            {luna > 0 && <p className="mt-1 font-mono text-xs text-faint">{formatLuna(luna)}</p>}
+            {luna > 0 && <p className="mt-1 font-mono text-xs tabular-nums text-faint">{formatLuna(luna)}</p>}
           </div>
 
           <div className="mt-3.5 flex flex-wrap justify-center gap-2">
@@ -266,7 +266,7 @@ function MiniApp() {
                 type="button"
                 onClick={() => setUnit(c)}
                 className={
-                  'rounded-full px-3 py-2 text-[13px] font-bold transition ' +
+                  'press min-h-[44px] rounded-full px-3.5 text-[13px] font-bold ' +
                   (unit === c ? 'bg-nimiq text-white dark:bg-gold dark:text-nimiq' : 'bg-raised text-ink')
                 }
               >
@@ -282,7 +282,7 @@ function MiniApp() {
                   key={n}
                   type="button"
                   onClick={() => setDigits(n)}
-                  className="rounded-full bg-raised px-3 py-2 text-[13px] font-bold text-ink transition active:opacity-70"
+                  className="press min-h-[44px] rounded-full bg-raised px-3.5 text-[13px] font-bold text-ink"
                 >
                   {n} NIM
                 </button>
@@ -330,7 +330,7 @@ function MiniApp() {
           <button
             type="button"
             onClick={testBell}
-            className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-gold/40 bg-gold/10 px-4 py-3 text-[13px] font-bold text-goldDeep transition active:bg-gold/20"
+            className="press mt-4 inline-flex min-h-[44px] w-full items-center justify-center gap-2 rounded-2xl border border-gold/40 bg-gold/10 px-4 text-[13px] font-bold text-accent active:bg-gold/20"
           >
             <BellRing className={'h-4 w-4 ' + (testing ? 'animate-sway' : '')} strokeWidth={2} />
             {testing ? t('testing') : t('testBell')}
@@ -343,7 +343,7 @@ function MiniApp() {
             onRepeat={repeat}
           />
 
-          <div className="sticky bottom-0 z-10 -mx-1 mt-3 bg-gradient-to-t from-surface from-[58%] to-transparent px-1 pb-0.5 pt-2.5">
+          <div className="sticky bottom-0 z-10 -mx-1 mt-3 bg-gradient-to-t from-surface via-surface via-[82%] to-transparent px-1 pb-0.5 pt-4">
             <button
               className={PRIMARY}
               disabled={luna <= 0 || !isNimiqAddress(address)}
@@ -359,34 +359,34 @@ function MiniApp() {
       {stage === 'live' && charge && (
         <section className="space-y-3.5">
           {watch.match ? (
-            <div className="animate-rise rounded-[18px] border border-mint/40 bg-gradient-to-b from-mint/20 to-mint/5 p-6 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-mint/40 bg-mint/15 px-3 py-1.5 text-xs font-bold text-mint">
+            <div className="animate-rise rounded-[18px] border border-success/40 bg-gradient-to-b from-success/15 to-success/5 p-6 text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-success/40 bg-success/10 px-3 py-1.5 text-xs font-bold text-success">
                 {t('verified')}
               </span>
-              <div className="mx-auto mt-3.5 grid h-16 w-16 place-items-center rounded-full bg-mint/15 text-mint">
+              <div className="mx-auto mt-3.5 grid h-16 w-16 place-items-center rounded-full bg-success/15 text-success">
                 <LunaBellMark size={40} />
               </div>
-              <p className="mt-2 font-display text-[42px] font-bold leading-none tracking-tight text-ink">
+              <p className="mt-2 font-display text-[42px] font-bold leading-none tracking-tight tabular-nums text-ink">
                 {formatNim(charge.v)} NIM
               </p>
               <p className="mt-1.5 font-mono text-xs text-muted">{formatLuna(charge.v)}</p>
               {charge.m && <p className="mt-1 text-sm text-muted">{charge.m}</p>}
             </div>
           ) : (
-            <div className={CARD + ' text-center'}>
+            <div className={CARD + ' animate-rise text-center'}>
               <div className="mb-3 flex items-center gap-3 text-left">
                 <Identicon address={charge.r} size={44} />
                 <div className="min-w-0">
-                  <p className="font-display text-[30px] font-bold leading-none tracking-tight text-ink">
+                  <p className="font-display text-[30px] font-bold leading-none tracking-tight tabular-nums text-ink">
                     {formatNim(charge.v)} NIM
                   </p>
-                  <p className="mt-1 font-mono text-[12px] text-muted">
+                  <p className="mt-1 font-mono text-[12px] tabular-nums text-muted">
                     {formatLuna(charge.v)}
                     {rate !== null ? ' - ' + formatFiat(lunaToNim(charge.v) * rate, fiatUnit) : ''}
                   </p>
                   {charge.m && <p className="mt-0.5 text-[13px] text-muted">{charge.m}</p>}
                 </div>
-                <div className="ml-auto grid h-12 w-12 shrink-0 animate-sway place-items-center rounded-full bg-gold/15 text-goldDeep">
+                <div className="ml-auto grid h-12 w-12 shrink-0 animate-sway place-items-center rounded-full bg-gold/15 text-accent">
                   <LunaBellMark size={28} />
                 </div>
               </div>
@@ -399,7 +399,7 @@ function MiniApp() {
                 {watch.head ? ' - ' + t('block') + ' ' + watch.head.toLocaleString() : ''}
               </p>
               {nimiq.inHost && nimiq.consensus === false && (
-                <p className="mt-1.5 text-[13px] text-danger">{t('waitingConsensus')}</p>
+                <p className="mt-1.5 text-[13px] text-dangerText">{t('waitingConsensus')}</p>
               )}
 
               <div className="mt-3 flex gap-2.5">
@@ -425,7 +425,7 @@ function MiniApp() {
                     {t('from')}
                   </small>
                 </div>
-                <span className="text-[22px] text-goldDeep">&rarr;</span>
+                <span className="text-[22px] text-accent">&rarr;</span>
                 <div className="flex flex-col items-center gap-1.5">
                   <Identicon address={watch.match.to} size={56} />
                   <small className="text-[11px] font-bold uppercase tracking-[0.09em] text-faint">
@@ -451,7 +451,7 @@ function MiniApp() {
           )}
 
           {watch.error && (
-            <p className="text-center text-[13px] text-danger">
+            <p className="text-center text-[13px] text-dangerText">
               {t('chainLookup')}: {watch.error}
             </p>
           )}

@@ -24,8 +24,8 @@ export function OpenInPay({
 
   const base =
     variant === 'button'
-      ? 'w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)] transition active:translate-y-px'
-      : 'block w-full text-center text-[13px] font-bold text-sky'
+      ? 'press w-full rounded-2xl bg-gradient-to-b from-glow to-gold px-4 py-4 text-base font-extrabold uppercase tracking-wide text-nimiq shadow-[0_10px_30px_-12px_rgba(233,178,19,0.8)]'
+      : 'press block min-h-[44px] w-full text-center text-[13px] font-bold text-link'
 
   return (
     <button type="button" onClick={() => openInNimiqPay(target())} className={base + ' ' + (className ?? '')}>

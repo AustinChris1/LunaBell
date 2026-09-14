@@ -8,8 +8,8 @@ export function Keypad({
   onBack: () => void
 }) {
   const key =
-    'h-[46px] rounded-xl bg-surface text-[22px] font-bold text-ink shadow-[0_1px_0_var(--line)] transition active:bg-raised'
-  const soft = 'h-[46px] rounded-xl bg-raised text-base font-bold text-muted transition active:opacity-70'
+    'press h-[46px] rounded-xl bg-surface text-[22px] font-bold text-ink shadow-[0_1px_0_var(--line)] active:bg-raised'
+  const soft = 'press h-[46px] rounded-xl bg-raised text-base font-bold text-muted'
 
   return (
     <div className="my-4 grid grid-cols-3 gap-2">

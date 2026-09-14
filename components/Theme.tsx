@@ -85,7 +85,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
         onClick={cycle}
         aria-label={`Theme: ${LABELS[active]}. Tap to change.`}
         title={`Theme: ${LABELS[active]}`}
-        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-surface text-muted transition hover:text-ink"
+        className="press inline-flex h-11 w-11 items-center justify-center rounded-full border border-line bg-surface text-muted hover:text-ink"
       >
         <Icon className="h-4 w-4" strokeWidth={1.9} />
       </button>
@@ -106,7 +106,7 @@ export function ThemeToggle({ compact = false }: { compact?: boolean }) {
             aria-pressed={on}
             title={LABELS[option]}
             className={
-              'inline-flex h-7 w-7 items-center justify-center rounded-full transition ' +
+              'press inline-flex h-8 w-8 items-center justify-center rounded-full ' +
               (on ? 'bg-gold text-nimiq' : 'text-faint hover:text-ink')
             }
           >

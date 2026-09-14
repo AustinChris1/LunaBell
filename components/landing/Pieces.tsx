@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 
+// the same strong ease-out the CSS tokens use
+export const EASE_OUT: [number, number, number, number] = [0.23, 1, 0.32, 1]
+
 // Inside Nimiq Pay nobody wants marketing, so hand them the app.
 export function HostRedirect() {
   const router = useRouter()
@@ -27,10 +30,10 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, transform: `translateY(${y}px)` }}
+      whileInView={{ opacity: 1, transform: 'translateY(0px)' }}
       viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.6, delay, ease: EASE_OUT }}
     >
       {children}
     </motion.div>
@@ -97,10 +100,10 @@ export function LiveBlock() {
   }, [])
 
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted backdrop-blur">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] tabular-nums text-muted">
       <span className="relative flex h-2 w-2">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-75" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-mint" />
+        <span className="absolute inline-flex h-full w-full animate-live rounded-full bg-success opacity-75" />
+        <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
       </span>
       {head ? 'Nimiq block ' + head.toLocaleString() : 'Connecting to Nimiq'}
     </span>
@@ -125,7 +128,7 @@ export function HearIt({ className }: { className?: string }) {
       type="button"
       onClick={play}
       className={
-        'group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-gold/40 bg-gold/10 px-6 py-3.5 text-sm font-bold text-goldDeep transition hover:border-gold hover:bg-gold/20 ' +
+        'press group relative inline-flex min-h-[44px] items-center gap-2.5 overflow-hidden rounded-full border border-gold/40 bg-gold/10 px-6 text-sm font-bold text-accent hover:border-gold hover:bg-gold/20 ' +
         (className ?? '')
       }
     >

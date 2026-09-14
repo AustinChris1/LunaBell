@@ -3,6 +3,7 @@ import { ArrowRight, Code2, Languages, Link2, ShieldCheck, Volume2, WalletMinima
 import { LunaBellMark, LunaBellWordmark } from '@/components/Logo'
 import { CountUp, HearIt, HostRedirect, LiveBlock, Reveal } from '@/components/landing/Pieces'
 import { ThemeToggle } from '@/components/Theme'
+import { MotionConfig } from 'framer-motion'
 import { Proof } from '@/components/landing/Proof'
 import { Steps } from '@/components/landing/Steps'
 
@@ -41,6 +42,7 @@ const FEATURES = [
 
 export default function Landing() {
   return (
+    <MotionConfig reducedMotion="user">
     <div className="min-h-dvh bg-bg font-ui text-ink antialiased">
       <HostRedirect />
 
@@ -79,9 +81,7 @@ export default function Landing() {
               The bell that only rings{' '}
               <br className="hidden sm:inline" />
               when the lunas are{' '}
-              <span className="bg-gradient-to-r from-gold via-glow to-gold bg-[length:200%_100%] bg-clip-text text-transparent animate-shimmer">
-                real
-              </span>
+              <span className="font-bold text-accent">real</span>
             </h1>
           </Reveal>
 
@@ -96,17 +96,17 @@ export default function Landing() {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/app"
-                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-7 py-3.5 text-sm font-bold text-[#241a02] shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] transition hover:brightness-105"
+                className="press group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-7 text-sm font-bold text-nimiq shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] hover:brightness-105"
               >
                 Open LunaBell
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" strokeWidth={2.4} />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.4} />
               </Link>
               <HearIt />
             </div>
           </Reveal>
 
           <Reveal delay={0.32}>
-            <p className="mt-6 font-mono text-[12px] text-faint">
+            <p className="mt-6 text-[13px] text-faint">
               Runs inside Nimiq Pay. Works in any browser for a look around.
             </p>
           </Reveal>
@@ -116,16 +116,15 @@ export default function Landing() {
       {/* the problem, with the hardware precedent */}
       <section className="relative border-y border-line bg-surface/60 px-5 py-20 sm:py-24">
         <div className="mx-auto max-w-4xl">
-          <Reveal className="text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold/80">The fake alert</p>
-            <h2 className="mt-4 font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
+          <div className="text-center">
+            <h2 className="font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
               A silent screen is how the fraud works
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-relaxed text-muted">
               Someone shows you a payment screen, you hand over the goods, nothing ever arrives.
               India answered this in hardware, and merchants bought it by the million.
             </p>
-          </Reveal>
+          </div>
 
           <div className="mt-14 grid gap-4 sm:grid-cols-3">
             {[
@@ -133,70 +132,67 @@ export default function Landing() {
               { n: 2.2, s: 'M', label: 'PhonePe Smart Speakers', sub: 'company figure, Apr 2023' },
               { n: 0, s: '', label: 'Of them are software', sub: 'every one is a device you buy' },
             ].map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.1}>
+              <div key={stat.label}>
                 <div className="h-full rounded-3xl border border-line bg-surface p-7 text-center">
-                  <div className="font-display text-[46px] font-bold leading-none tracking-tight text-gold">
+                  <div className="font-display text-[46px] font-bold leading-none tracking-tight tabular-nums text-accent">
                     {stat.n === 0 ? '0' : <CountUp to={stat.n} decimals={1} />}
                     {stat.s}
                   </div>
                   <p className="mt-3 text-[14px] font-semibold text-ink">{stat.label}</p>
-                  <p className="mt-1 font-mono text-[11px] text-faint">{stat.sub}</p>
+                  <p className="mt-1 text-[12px] text-faint">{stat.sub}</p>
                 </div>
-              </Reveal>
+              </div>
             ))}
           </div>
 
-          <Reveal delay={0.3}>
+          <div>
             <p className="mx-auto mt-8 max-w-2xl text-center text-[14px] leading-relaxed text-faint">
               &ldquo;Before sound boxes, people were using apps to create fake payment receipts. I got
               conned a few times.&rdquo;
-              <span className="mt-1 block font-mono text-[11px] text-faint">
+              <span className="mt-1 block text-[12px] text-faint">
                 a merchant, quoted by Rest of World, 4 April 2023
               </span>
             </p>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* how it works */}
       <section className="px-5 py-20 sm:py-28">
-        <Reveal className="mx-auto mb-14 max-w-3xl px-5 text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold/80">How it works</p>
-          <h2 className="mt-4 font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
+        <div className="mx-auto mb-14 max-w-3xl px-5 text-center">
+          <h2 className="font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
             One charge, start to settled
           </h2>
-        </Reveal>
+        </div>
         <Steps />
       </section>
 
       {/* screenshot vs receipt */}
       <section className="border-y border-line bg-surface/60 px-5 py-20 sm:py-24">
-        <Reveal className="mx-auto mb-12 max-w-3xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold/80">Proof, not a picture</p>
-          <h2 className="mt-4 font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
+        <div className="mx-auto mb-12 max-w-3xl text-center">
+          <h2 className="font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
             One of these keeps counting
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-muted">
             The numbers on the right are read live from Nimiq mainnet, right now, in your browser.
           </p>
-        </Reveal>
+        </div>
         <Proof />
       </section>
 
       {/* features */}
       <section className="px-5 py-20 sm:py-28">
-        <Reveal className="mx-auto mb-14 max-w-3xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-gold/80">What it does</p>
-          <h2 className="mt-4 font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <h2 className="font-display text-[30px] font-semibold leading-tight tracking-[-0.02em] sm:text-[42px]">
             Small on purpose
           </h2>
-        </Reveal>
+        </div>
 
         <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {FEATURES.map((f, i) => {
             const Icon = f.icon
             return (
-              <Reveal key={f.title} delay={(i % 3) * 0.08}>
+              <div key={f.title}>
                 <div className="group h-full rounded-3xl border border-line bg-surface p-7 transition hover:border-gold/25 hover:bg-raised">
                   <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-line bg-bg">
                     <Icon className="h-5 w-5 text-gold" strokeWidth={1.75} />
@@ -204,7 +200,7 @@ export default function Landing() {
                   <h3 className="font-display text-[19px] font-semibold text-ink">{f.title}</h3>
                   <p className="mt-2.5 text-[14.5px] leading-relaxed text-muted">{f.body}</p>
                 </div>
-              </Reveal>
+              </div>
             )
           })}
         </div>
@@ -213,7 +209,7 @@ export default function Landing() {
       {/* close */}
       <section className="relative overflow-hidden px-5 pb-28 pt-8">
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[420px] bg-gradient-to-t from-gold/[0.09] to-transparent" />
-        <Reveal className="relative mx-auto max-w-2xl text-center">
+        <div className="relative mx-auto max-w-2xl text-center">
           <span className="inline-flex text-gold animate-sway">
             <LunaBellMark size={54} />
           </span>
@@ -226,24 +222,25 @@ export default function Landing() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/app"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-8 py-4 text-sm font-bold text-[#241a02] shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] transition hover:brightness-105"
+              className="press group inline-flex min-h-[48px] items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-8 text-sm font-bold text-nimiq shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] hover:brightness-105"
             >
               Open LunaBell
-              <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" strokeWidth={2.4} />
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.4} />
             </Link>
             <HearIt />
           </div>
-        </Reveal>
+        </div>
       </section>
 
       <footer className="border-t border-line px-5 py-10">
         <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
           <LunaBellWordmark size={22} />
-          <p className="font-mono text-[11px] leading-relaxed text-faint">
+          <p className="text-[12px] leading-relaxed text-faint">
             Built for the Nimiq Mini Apps Competition, Cycle II. MIT licensed.
           </p>
         </div>
       </footer>
     </div>
+    </MotionConfig>
   )
 }

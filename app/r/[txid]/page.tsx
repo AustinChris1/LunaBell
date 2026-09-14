@@ -13,7 +13,7 @@ export const dynamic = 'force-dynamic'
 const SHELL = 'mx-auto flex min-h-dvh max-w-[430px] flex-col px-4 pb-9 pt-4'
 const CARD = 'rounded-[18px] border border-line bg-surface p-5'
 const GHOST =
-  'w-full rounded-2xl border border-line px-4 py-3.5 text-sm font-bold text-ink transition active:bg-raised'
+  'press w-full rounded-2xl border border-line px-4 py-3.5 text-sm font-bold text-ink active:bg-raised'
 
 export default async function ReceiptPage({ params }: { params: Promise<{ txid: string }> }) {
   const { txid } = await params
@@ -51,11 +51,11 @@ export default async function ReceiptPage({ params }: { params: Promise<{ txid: 
     <main className={SHELL}>
       <Header label="Receipt" />
 
-      <section className="animate-rise rounded-[18px] border border-mint/40 bg-gradient-to-b from-mint/20 to-mint/5 p-6 text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-mint/40 bg-mint/15 px-3 py-1.5 text-xs font-bold text-mint">
+      <section className="animate-rise rounded-[18px] border border-success/40 bg-gradient-to-b from-success/15 to-success/5 p-6 text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-success/40 bg-success/10 px-3 py-1.5 text-xs font-bold text-success">
           <T k="verifiedJustNow" />
         </span>
-        <p className="mt-3.5 font-display text-[42px] font-bold leading-none tracking-tight text-ink">
+        <p className="mt-3.5 font-display text-[42px] font-bold leading-none tracking-tight tabular-nums text-ink">
           {formatNim(tx.value)} NIM
         </p>
         <p className="mt-2 font-mono text-xs text-muted">{formatLuna(tx.value)}</p>
@@ -70,7 +70,7 @@ export default async function ReceiptPage({ params }: { params: Promise<{ txid: 
               <T k="from" />
             </small>
           </div>
-          <span className="text-[22px] text-goldDeep">&rarr;</span>
+          <span className="text-[22px] text-accent">&rarr;</span>
           <div className="flex flex-col items-center gap-1.5">
             <Identicon address={tx.to} size={56} />
             <small className="text-[11px] font-bold uppercase tracking-[0.09em] text-faint">
@@ -88,7 +88,7 @@ export default async function ReceiptPage({ params }: { params: Promise<{ txid: 
       </section>
 
       <section className={CARD + ' mt-3 text-center'}>
-        <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-gold/15 text-goldDeep">
+        <div className="mx-auto mb-3 grid h-14 w-14 place-items-center rounded-full bg-gold/15 text-accent">
           <LunaBellMark size={32} />
         </div>
         <p className="text-[13px] leading-relaxed text-muted">
@@ -124,7 +124,7 @@ function Row({ label, value, mono }: { label: React.ReactNode; value: string; mo
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-line py-3 last:border-0">
       <span className="text-sm text-muted">{label}</span>
-      <span className={'text-sm text-ink ' + (mono ? 'font-mono' : '')}>{value}</span>
+      <span className={'text-sm tabular-nums text-ink ' + (mono ? 'font-mono' : '')}>{value}</span>
     </div>
   )
 }

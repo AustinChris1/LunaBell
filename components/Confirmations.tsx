@@ -32,11 +32,11 @@ export function Confirmations({ hash, initial, head }: { hash: string; initial: 
     <>
       <div className={row}>
         <span className="text-sm text-muted">Confirmations</span>
-        <span className="font-mono text-sm text-ink">{count.toLocaleString()}</span>
+        <span className="font-mono text-sm tabular-nums text-ink">{count.toLocaleString()}</span>
       </div>
       <div className={row}>
         <span className="text-sm text-muted">Chain head</span>
-        <span className="font-mono text-sm text-ink">{tip.toLocaleString()}</span>
+        <span className="font-mono text-sm tabular-nums text-ink">{tip.toLocaleString()}</span>
       </div>
     </>
   )

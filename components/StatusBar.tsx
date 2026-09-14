@@ -48,15 +48,15 @@ export function StatusBar({
       : 'Mainnet'
 
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-muted">
+    <span className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] tabular-nums text-muted">
       <span className="relative flex h-2 w-2">
         <span
           className={
             'absolute inline-flex h-full w-full rounded-full opacity-75 ' +
-            (ok ? 'animate-ping bg-mint' : 'bg-gold')
+            (ok ? 'animate-live bg-success' : 'bg-gold')
           }
         />
-        <span className={'relative inline-flex h-2 w-2 rounded-full ' + (ok ? 'bg-mint' : 'bg-gold')} />
+        <span className={'relative inline-flex h-2 w-2 rounded-full ' + (ok ? 'bg-success' : 'bg-gold')} />
       </span>
       {label}
     </span>
