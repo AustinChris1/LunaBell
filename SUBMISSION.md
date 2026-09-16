@@ -25,6 +25,41 @@ MIT. NIM native. Built to be trusted with your hands full.
 - Open in Nimiq Pay: open https://lunabell.vercel.app on a phone and tap Open in Nimiq Pay (the nimpay.app/miniapps/open link 404s until the directory PR merges)
 - Demo video: (link once recorded)
 
+## Real users in 48 hours (15 scoring points)
+
+Real usage is scored. It is not a submit-blocker. Unique Nimiq wallets that
+open LunaBell inside Nimiq Pay and tap a wallet action count. The new
+**Ring 1 NIM on this phone** button is the 60-second path: one wallet, one
+tagged mainnet payment, the bell rings. No second phone.
+
+Do these in order, today:
+
+1. Open https://lunabell.vercel.app on your phone, tap **Open in Nimiq Pay**,
+   then **Ring 1 NIM on this phone**. Confirm the native sheet. Film that.
+2. Post in Skool, Promote Your Work, with the paste below. Ask every builder
+   to do the same 1 NIM self-ring. That is how you get distinct wallets.
+3. Post the same on X, tag @miniappscomp @nimiq.
+4. If Sip & Ship is still on the calendar, demo the shout live.
+
+### Skool / X paste
+
+```
+LunaBell is live for Cycle II.
+
+It is a payment terminal you listen to. Name an amount, put the phone down.
+When the NIM actually settles, the phone chimes and speaks it. The receipt
+is a link that re-reads the chain, so a screenshot cannot fake it.
+
+Takes 60 seconds inside Nimiq Pay:
+1. Open https://lunabell.vercel.app on your phone
+2. Tap Open in Nimiq Pay
+3. Tap Ring 1 NIM on this phone
+4. Confirm. The bell rings on a real tagged payment to yourself.
+
+Repo: https://github.com/AustinChris1/LunaBell
+Need 1 NIM of dust. Tell me if it rang.
+```
+
 ## Demo video shot list (about 40 seconds)
 
 1. 0 to 5s: phone on a counter showing a 5 NIM charge and its QR, LunaBell listening.

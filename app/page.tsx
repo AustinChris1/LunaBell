@@ -6,6 +6,7 @@ import { ThemeToggle } from '@/components/Theme'
 import { MotionConfig } from 'framer-motion'
 import { Proof } from '@/components/landing/Proof'
 import { Steps } from '@/components/landing/Steps'
+import { OpenInPay } from '@/components/OpenInPay'
 
 const FEATURES = [
   {
@@ -94,11 +95,16 @@ export default function Landing() {
 
           <Reveal delay={0.24}>
             <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+              <OpenInPay
+                url="https://lunabell.vercel.app/app"
+                variant="button"
+                className="!w-auto min-h-[44px] rounded-full px-7 shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)]"
+              />
               <Link
                 href="/app"
-                className="press group inline-flex min-h-[44px] items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-7 text-sm font-bold text-nimiq shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] hover:brightness-105"
+                className="press group inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-surface px-7 text-sm font-bold text-ink hover:bg-raised"
               >
-                Open LunaBell
+                Open in browser
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.4} />
               </Link>
               <HearIt />
@@ -220,11 +226,16 @@ export default function Landing() {
             Or in the group chat where someone still owes you. Same bell, same receipt.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <OpenInPay
+              url="https://lunabell.vercel.app/app"
+              variant="button"
+              className="!w-auto min-h-[48px] rounded-full px-8 shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)]"
+            />
             <Link
               href="/app"
-              className="press group inline-flex min-h-[48px] items-center gap-2 rounded-full bg-gradient-to-b from-glow to-gold px-8 text-sm font-bold text-nimiq shadow-[0_10px_40px_-8px_rgba(240,180,41,0.6)] hover:brightness-105"
+              className="press group inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line bg-surface px-8 text-sm font-bold text-ink hover:bg-raised"
             >
-              Open LunaBell
+              Open in browser
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.4} />
             </Link>
             <HearIt />

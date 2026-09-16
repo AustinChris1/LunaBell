@@ -59,6 +59,7 @@ function MiniApp() {
   const [announced, setAnnounced] = useState(false)
   const [lastSpoken, setLastSpoken] = useState('')
   const [testing, setTesting] = useState(false)
+  const [paying, setPaying] = useState(false)
   const [takingsKey, setTakingsKey] = useState(0)
 
   const address = nimiq.account ?? manualAddress
@@ -175,31 +176,80 @@ function MiniApp() {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  const startCharge = useCallback(async () => {
-    if (!isNimiqAddress(address) || luna <= 0) return
-    await unlockAudio()
-    let head = 0
+  const readHead = async (): Promise<number> => {
+    try {
+      if (nimiq.provider) return await nimiq.provider.getBlockNumber()
+    } catch {
+      /* fall through to public RPC */
+    }
     try {
       const probe = await fetch('/api/head')
       const body = await probe.json()
-      head = typeof body.head === 'number' ? body.head : 0
+      return typeof body.head === 'number' ? body.head : 0
     } catch {
-      head = 0
+      return 0
     }
+  }
+
+  const startCharge = useCallback(async () => {
+    if (!isNimiqAddress(address) || luna <= 0) return
+    await unlockAudio()
     const next: Charge = {
       r: address,
       v: luna,
       m: memo.slice(0, 60),
       n: newNonce(),
       t: Date.now(),
-      b: head,
+      b: await readHead(),
     }
     setCharge(next)
     setTag(await chargeData(next))
     setAnnounced(false)
     setStage('live')
     if (!nimiq.account) localStorage.setItem('lb.address', address)
-  }, [address, luna, memo, nimiq.account])
+  }, [address, luna, memo, nimiq.account, nimiq.provider])
+
+  const payCharge = async (target: Charge) => {
+    if (!nimiq.provider) return
+    setPaying(true)
+    try {
+      const data = await chargeData(target)
+      const result = await nimiq.provider.sendBasicTransactionWithData({
+        recipient: prettyAddress(target.r),
+        value: target.v,
+        data,
+      })
+      if (result && typeof result === 'object' && 'error' in result) {
+        throw new Error((result as { error: { message: string } }).error.message)
+      }
+    } catch {
+      /* user rejected the native sheet; the charge stays live */
+    } finally {
+      setPaying(false)
+    }
+  }
+
+  const ringSelf = async () => {
+    if (!nimiq.provider || !nimiq.account) return
+    await unlockAudio()
+    const next: Charge = {
+      r: nimiq.account,
+      v: nimToLuna(1),
+      m: 'Ring this phone',
+      n: newNonce(),
+      t: Date.now(),
+      b: await readHead(),
+    }
+    const data = await chargeData(next)
+    setDigits('1')
+    setUnit('nim')
+    setMemo(next.m)
+    setCharge(next)
+    setTag(data)
+    setAnnounced(false)
+    setStage('live')
+    await payCharge(next)
+  }
 
   const reset = () => {
     setStage('compose')
@@ -336,6 +386,17 @@ function MiniApp() {
             {testing ? t('testing') : t('testBell')}
           </button>
 
+          {nimiq.inHost && nimiq.account && (
+            <button
+              type="button"
+              onClick={ringSelf}
+              disabled={paying}
+              className="press mt-2 inline-flex min-h-[44px] w-full items-center justify-center rounded-2xl border border-nimiq/20 bg-nimiq/5 px-4 text-[13px] font-bold text-ink active:bg-nimiq/10 disabled:opacity-40"
+            >
+              {paying ? t('ringingSelf') : t('ringSelf')}
+            </button>
+          )}
+
           <TakingsPanel
             refreshKey={takingsKey}
             rate={rate}
@@ -401,6 +462,18 @@ function MiniApp() {
               {nimiq.inHost && nimiq.consensus === false && (
                 <p className="mt-1.5 text-[13px] text-dangerText">{t('waitingConsensus')}</p>
               )}
+
+              {nimiq.inHost &&
+                nimiq.account &&
+                normalizeAddress(nimiq.account) === normalizeAddress(charge.r) && (
+                  <button
+                    className={PRIMARY + ' mt-3'}
+                    disabled={paying}
+                    onClick={() => payCharge(charge)}
+                  >
+                    {paying ? t('ringingSelf') : t('payThisCharge')}
+                  </button>
+                )}
 
               <div className="mt-3 flex gap-2.5">
                 <button className={GHOST} onClick={share}>
