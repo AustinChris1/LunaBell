@@ -24,7 +24,7 @@ No custody of funds.
 **[Live demo](https://lunabell.vercel.app)** · Built for the Nimiq Mini Apps Competition, Cycle II.
 
 <p align="center">
-  <img src="submission/screenshot-2.png" alt="LunaBell listening for a 250 NIM charge, QR on screen" width="390" />
+  <img src="docs/listen.png" alt="LunaBell listening for a 250 NIM charge, QR on screen" width="390" />
 </p>
 
 ---
@@ -60,7 +60,7 @@ It is not only for a counter. A stall, a cafe, a freelancer, a roommate, anyone 
 A screenshot cannot do that.
 
 <p align="center">
-  <img src="submission/screenshot-3.png" alt="LunaBell receipt re-reading confirmations from the Nimiq chain" width="390" />
+  <img src="docs/receipt.png" alt="LunaBell receipt re-reading confirmations from the Nimiq chain" width="390" />
 </p>
 
 ---
@@ -110,7 +110,7 @@ The day's takings screen shows total received today, individual payments, memos,
 Nothing is sent to a LunaBell server.
 
 <p align="center">
-  <img src="submission/screenshot-4.png" alt="Today's takings on LunaBell, two cafe payments already rung" width="390" />
+  <img src="docs/takings.png" alt="Today's takings on LunaBell, two cafe payments already rung" width="390" />
 </p>
 
 ---
@@ -214,8 +214,6 @@ nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app
 ```
 
 The `https://nimpay.app/miniapps/open/lunabell.vercel.app` form only works once LunaBell is in the public directory (`nimiq/awesome`). Until then that page returns "Unknown mini app host". In-app **Open in Nimiq Pay** buttons use the same platform launches as the official site (`intent://` on Android, `nimiqpay://` on iOS) and do not depend on the directory.
-
-Submission copy lives in [submission/FORM.md](submission/FORM.md). The demo shot list is in [submission/demo.md](submission/demo.md).
 
 ---
 
