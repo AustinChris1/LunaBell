@@ -8,5 +8,6 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@nimiq/identicons'],
   outputFileTracingRoot: dir,
+  devIndicators: false,
 }
 export default nextConfig

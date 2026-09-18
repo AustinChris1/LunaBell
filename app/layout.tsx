@@ -28,7 +28,7 @@ const mono = Fira_Mono({
 export const metadata: Metadata = {
   title: 'LunaBell',
   description:
-    'The bell that only rings when the lunas are real. Verified payment announcements for Nimiq Pay.',
+    'Someone says they paid. Their screen says sent. LunaBell rings only when the payment is actually on the Nimiq chain.',
   icons: {
     icon: '/icon.svg',
     shortcut: '/icon.svg',

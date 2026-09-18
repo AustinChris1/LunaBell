@@ -77,7 +77,13 @@ export default function Landing() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.08}>
+          <Reveal delay={0.04}>
+            <p className="mx-auto mb-5 max-w-xl text-[15px] font-semibold leading-snug text-muted sm:text-[17px]">
+              Someone says they paid. Their screen says sent. You still don&apos;t know.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
             <h1 className="font-display text-[40px] font-semibold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[62px]">
               The bell that only rings{' '}
               <br className="hidden sm:inline" />
@@ -86,10 +92,11 @@ export default function Landing() {
             </h1>
           </Reveal>
 
-          <Reveal delay={0.16}>
+          <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-xl text-[17px] leading-relaxed text-muted">
-              Name an amount and put the phone down. LunaBell watches Nimiq and says the payment out
-              loud the moment it actually settles, then hands you a receipt no screenshot can fake.
+              LunaBell turns a phone into a Nimiq payment soundbox. Create a charge, show the QR,
+              put the phone down. When the payment actually settles on-chain, the bell rings and
+              speaks how much arrived.
             </p>
           </Reveal>
 

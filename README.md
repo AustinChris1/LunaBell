@@ -2,74 +2,159 @@
 
 **The bell that only rings when the lunas are real.**
 
-A Nimiq Pay Mini App. Name an amount, share it or show the QR, and put the phone
-down. LunaBell watches the Nimiq chain and announces the payment out loud the
-moment it actually settles, then hands over a receipt that re-reads the chain
-every time anyone opens it.
+### Someone says they paid.
 
-Built for the Nimiq Mini Apps Competition, Cycle II.
+Their phone says **Sent**.
 
-**Live:** https://lunabell.vercel.app  
-**Open in Nimiq Pay:** open the live URL on your phone and tap Open in Nimiq Pay, or use `nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app`
+You still do not know if the money arrived.
+
+**LunaBell does.**
+
+LunaBell is a Nimiq Pay Mini App that turns a phone into a payment soundbox. Create a charge, show the QR, and put the phone down. LunaBell watches for that exact payment on the Nimiq chain.
+
+When it actually settles, **the bell rings.** It announces the amount out loud and opens a receipt that can be checked against the chain again later.
+
+No screenshot to trust.
+No account to create.
+No database.
+No custody of funds.
+
+**Just the payment, verified on-chain.**
+
+**[Live demo](https://lunabell.vercel.app)** · Built for the Nimiq Mini Apps Competition, Cycle II.
+
+<p align="center">
+  <img src="submission/screenshot-2.png" alt="LunaBell listening for a 250 NIM charge, QR on screen" width="390" />
+</p>
+
+---
 
 ## The problem
 
-The fake payment screenshot. A customer shows a "sent" screen, walks off, and
-nothing ever arrives. India answered this in hardware: per Rest of World
-(4 April 2023), Paytm had deployed 6.8 million Soundboxes and PhonePe 2.2 million
-Smart Speakers, and the merchants quoted in that piece name doctored receipts as
-the reason they bought one. A silent screen is how the fraud works. LunaBell is
-that device as free software, inside a wallet people already have.
+A payment screenshot proves almost nothing.
 
-It is not only for a counter. Anyone waiting on money, a roommate, a freelancer,
-a friend who says "I sent it," gets the same two things: a sound they can trust
-and a receipt they can forward.
+A customer can show a convincing "payment successful" screen and walk away before anyone has received a luna. That is why payment soundboxes became popular in markets such as India. Merchants interviewed by [*Rest of World*](https://restofworld.org/2023/india-digital-payments-sound-boxes/) (4 April 2023) named fake or doctored receipts as a reason they bought one. Paytm had deployed 6.8 million Soundboxes. PhonePe had 2.2 million Smart Speakers. Every one of them is a device you purchase.
 
-## How it works
+The soundbox changes the question from "can I trust what you are showing me?" to **"did the payment actually arrive?"**
 
-A **charge** is the only object in the app: an amount, a memo, a nonce, and the
-block height when it was created. It lives entirely in its own URL. There is no
-database, no account, and nothing custodial.
+LunaBell is that device as free software, inside a wallet people already have.
 
-1. **Create.** The payee names an amount. The app derives a short tag,
-   `LB:` plus the first 8 hex characters of `SHA-256(recipient|value|nonce)`.
-2. **Share.** The charge travels as a link or a QR code. A payer without Nimiq
-   Pay installs it and pays from their own wallet to the payee's address.
-3. **Pay.** The payer sends with `sendBasicTransactionWithData`, carrying the tag
-   in the transaction data. That binds the payment to this charge on chain.
-4. **Ring.** A watcher matches recipient, exact amount, tag, and a block height
-   at or after creation. Only then does the phone chime and speak the amount, in
-   the host language Nimiq Pay exposes as `window.nimiqPay.language`.
-5. **Verify.** `/r/<txid>` fetches the transaction again on every open. The
-   confirmation count rises each time you reload it. A screenshot cannot do that.
+Open it on a phone. Create a charge. Show the QR. Keep doing whatever you were doing.
 
-### What is honest about the verification
+When the real payment arrives, **the phone tells you.**
 
-The Mini App provider surface is `listAccounts`, `sign`, `isConsensusEstablished`,
-`getBlockNumber`, and the send methods. There is no watch, no transaction lookup,
-and no inclusion proof. So this app does not claim to be a light client.
-`isConsensusEstablished()` is used as a **gate**, never announce while the host
-wallet is out of sync, and the match itself is read from a public Nimiq RPC node.
-The anti-fraud property comes from the receipt re-deriving state from the chain
-on every open, not from where the query runs.
+And because the receipt is tied to the transaction itself, anyone can open it later and check the chain again.
 
-### Why it never rings by accident
+It is not only for a counter. A stall, a cafe, a freelancer, a roommate, anyone who has ever been told "I sent it" gets the same two things: a sound they can trust, and a receipt they can forward.
 
-A charge rings only for its own tag, its exact amount, its recipient, and only
-for blocks at or after the moment it was created. A dust transfer, a repeat of an
-older payment, or an untagged transfer cannot trigger it. `pnpm test` asserts each
-of those cases.
+---
 
-## The day's takings
+## See it in action
 
-Every ring is written to the phone's own storage: amount, memo, time and the
-transaction hash. The compose screen shows a running total for today, expands
-into the list, speaks the total aloud on demand, and repeats any past charge in
-one tap. Nothing leaves the device and there is still no database.
+1. **Create a charge.** Enter an amount and an optional memo.
+2. **Show the QR.** The payer scans it and pays from their own wallet.
+3. **Put the phone down.** LunaBell waits for the actual transaction.
+4. **The payment settles.** The bell rings and announces the amount.
+5. **Verify it later.** The receipt reads the transaction from the chain again. Its confirmation count changes as the transaction gets deeper into the chain.
 
-## Hand off from another app
+A screenshot cannot do that.
 
-Any site, QR or Mini App can open LunaBell with a charge already filled in:
+<p align="center">
+  <img src="submission/screenshot-3.png" alt="LunaBell receipt re-reading confirmations from the Nimiq chain" width="390" />
+</p>
+
+---
+
+## Why LunaBell is different
+
+Most payment requests tell you how to **send** money.
+
+LunaBell is about what happens **after someone says they sent it.**
+
+A charge is bound to the recipient, the exact amount, a unique payment tag, and the block height when the charge was created. A payment only rings the bell when those conditions match.
+
+That means an unrelated transfer, an old payment, an untagged transfer, or a tiny dust transaction cannot accidentally ring it.
+
+There is no LunaBell account.
+There is no LunaBell wallet.
+There is no LunaBell database.
+
+**The blockchain is the source of truth.**
+
+---
+
+## Built around Nimiq
+
+LunaBell uses Nimiq Pay for the payment itself and reads the public Nimiq chain for verification.
+
+The payer sends with `sendBasicTransactionWithData`, so the charge tag travels with the transaction. The receipt then reconstructs the payment from that transaction.
+
+NIM is the native asset. Fees are zero. The Mini App never holds funds.
+
+### What the verification claim actually is
+
+The Nimiq Pay Mini App interface does not currently expose transaction watching or transaction lookup to Mini Apps. LunaBell uses `isConsensusEstablished()` as a safety gate, and reads transaction state through a public Nimiq RPC endpoint.
+
+It does **not** claim to be a light client or an inclusion-proof system.
+
+The claim is simpler: **when LunaBell says a payment arrived, it has matched that payment against the Nimiq chain.**
+
+---
+
+## More than a soundbox
+
+Every confirmed ring is saved on the phone.
+
+The day's takings screen shows total received today, individual payments, memos, timestamps, and transaction hashes. You can replay a previous announcement or speak the day's total aloud.
+
+Nothing is sent to a LunaBell server.
+
+<p align="center">
+  <img src="submission/screenshot-4.png" alt="Today's takings on LunaBell, two cafe payments already rung" width="390" />
+</p>
+
+---
+
+## Try it
+
+**Live:** https://lunabell.vercel.app
+
+Inside Nimiq Pay, LunaBell takes the receiving address from the host wallet.
+
+Outside Nimiq Pay, it runs in browser preview so the flow can still be explored.
+
+The fastest way to hear a real ring with one wallet:
+
+1. Open the live URL on your phone.
+2. Tap **Open in Nimiq Pay**.
+3. Tap **Ring 1 NIM on this phone**.
+4. Confirm the native sheet. The bell rings on a tagged mainnet payment to yourself.
+
+Need about 1 NIM of dust. Fees are zero.
+
+---
+
+## The mark
+
+A bell carrying a crescent: the bell that rings only when the lunas are real. One NIM is 100,000 luna, so the subunit is what the bell is listening for. It is drawn as geometry in `components/Logo.tsx` and holds its silhouette down to 16px.
+
+Light is for a counter in daylight. Dark is for a counter at night. Gold is the colour of a struck bell.
+
+---
+
+## Technical notes
+
+A **charge** is the only object in the app: an amount, a memo, a nonce, and the block height when it was created. It lives entirely in its own URL.
+
+The payment tag is `LB:` plus the first 8 hex characters of `SHA-256(recipient|value|nonce)`. The watcher matches recipient, exact luna amount, tag, and a block at or after creation. `pnpm test` asserts the bell stays silent for a wrong amount, a wrong tag, a wrong recipient, an untagged transfer, a block older than the charge, and a failed execution.
+
+Spoken amounts follow `window.nimiqPay.language`: English, German, Spanish, French, Portuguese, falling back to English.
+
+The Mini App provider surface used here is `listAccounts`, `sign`, `isConsensusEstablished`, `getBlockNumber`, and the send methods.
+
+### Hand off from another app
+
+Any site, QR, or Mini App can open LunaBell with a charge already filled in:
 
 ```
 https://lunabell.vercel.app/app?amount=12.5&unit=usd&memo=Table%204&to=NQ...
@@ -80,93 +165,59 @@ https://lunabell.vercel.app/app?amount=12.5&unit=usd&memo=Table%204&to=NQ...
 | `amount` | Digits, decimal point allowed |
 | `unit` | `nim` (default) or `usd` `eur` `gbp` `brl` `inr` |
 | `memo` | Shown to the payer, 60 characters |
-| `to` | Receiving address; ignored inside Nimiq Pay, which uses the wallet |
+| `to` | Receiving address. Ignored inside Nimiq Pay, which uses the wallet |
 
 The payee still presses Listen, so a link can never start a charge silently.
 
-## Install it
+### Install
 
-The app ships a manifest and a network-first service worker, so it installs to a
-home screen and opens fullscreen on `/app`, which is what a counter phone wants.
-The service worker never caches `/api/`, so chain reads are always live.
+The app ships a manifest and a network-first service worker, so it installs to a home screen and opens fullscreen on `/app`. The service worker never caches `/api/`, so chain reads stay live.
 
-## Languages
+---
 
-The interface and the spoken amount both follow `window.nimiqPay.language`:
-English, German, Spanish, French and Portuguese, falling back to English.
-
-## Light and dark
-
-One theme choice covers the landing page and the Mini App: light, dark, or follow
-the system. It is stored per browser and applied before first paint, so there is
-no flash. Light is the Nimiq Pay palette so the Mini App sits inside the host
-without a seam; dark is the LunaBell night. Every screen is screenshotted in both
-by `pnpm shots`.
-
-## Looks like Nimiq Pay
-
-Light gray canvas, white cards, Nimiq gold (`#E9B213`) and blue (`#1F2348`), Muli/Mulish
-and Fira Mono, pill buttons, IBAN-grouped addresses, and official Nimiq Identicons on
-every address. The listen screen is a till: amount pad, live luna count, consensus
-pill, block height, and a QR with the Nimiq hexagon at its centre. The receipt is
-the Hub-style from/to identicon pair, with a confirmation count that keeps rising.
-
-## The mark
-
-A bell carrying a crescent: the bell that rings only when the lunas are real.
-One NIM is 100,000 luna, so the subunit is the thing the bell is listening for.
-It is drawn as geometry in `components/Logo.tsx`, inherits `currentColor`, and
-holds its silhouette down to 16px.
-
-## Run it
+## Testing
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open http://localhost:3000 for the landing page; the Mini App itself is at /app. Outside Nimiq Pay the app runs in web preview and
-asks for the receiving address by hand, so the whole flow is testable in a normal
-browser. Inside Nimiq Pay the address fills in from the wallet.
+Open http://localhost:3000 for the landing page. The Mini App itself is at `/app`.
 
 ```bash
-pnpm test    # charge, tag, and matcher rules, run on Node's native type stripping
+pnpm test    # charge, tag, and matcher rules
 pnpm shots   # every screen in light and dark, needs a local server
 ```
 
-See [TESTING.md](TESTING.md) for a full walkthrough of every feature, including
-what can be checked without a wallet and what cannot.
+See [TESTING.md](TESTING.md) for the full walkthrough: what can be checked without a wallet, and what cannot.
+
+---
 
 ## Deploy
 
-Vercel, zero configuration. No database and no environment variables are
-required. One click from the repo:
+Vercel, zero configuration. No database and no environment variables are required.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/AustinChris1/LunaBell)
-
-Or from a terminal:
 
 ```bash
 npx vercel --prod
 ```
 
-Submission copy and the demo shot list live in [SUBMISSION.md](SUBMISSION.md).
-
 | Variable | Default | Purpose |
 | --- | --- | --- |
 | `NIMIQ_RPC_URL` | `https://rpc.nimiqwatch.com` | Nimiq mainnet RPC used by the watcher and receipts |
 
-Point a Mini App at the deployed origin with either share form:
+Point a Mini App at the deployed origin:
 
 ```
 nimiqpay://miniapp?url=https%3A%2F%2Flunabell.vercel.app
 ```
 
-The `https://nimpay.app/miniapps/open/lunabell.vercel.app` form only works once
-LunaBell is in the public directory (`nimiq/awesome`); until then that page returns
-"Unknown mini app host". The in app **Open in Nimiq Pay** buttons use the same
-platform launches as the official site (an `intent://` App Link on Android, the
-`nimiqpay://` scheme on iOS) and do not depend on the directory.
+The `https://nimpay.app/miniapps/open/lunabell.vercel.app` form only works once LunaBell is in the public directory (`nimiq/awesome`). Until then that page returns "Unknown mini app host". In-app **Open in Nimiq Pay** buttons use the same platform launches as the official site (`intent://` on Android, `nimiqpay://` on iOS) and do not depend on the directory.
+
+Submission copy lives in [submission/FORM.md](submission/FORM.md). The demo shot list is in [submission/demo.md](submission/demo.md).
+
+---
 
 ## Layout
 

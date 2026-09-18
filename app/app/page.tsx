@@ -397,14 +397,7 @@ function MiniApp() {
             </button>
           )}
 
-          <TakingsPanel
-            refreshKey={takingsKey}
-            rate={rate}
-            unit={unit}
-            onRepeat={repeat}
-          />
-
-          <div className="sticky bottom-0 z-10 -mx-1 mt-3 bg-gradient-to-t from-surface via-surface via-[82%] to-transparent px-1 pb-0.5 pt-4">
+          <div className="mt-3">
             <button
               className={PRIMARY}
               disabled={luna <= 0 || !isNimiqAddress(address)}
@@ -414,6 +407,13 @@ function MiniApp() {
             </button>
             {!nimiq.inHost && <OpenInPay className="mt-2.5" />}
           </div>
+
+          <TakingsPanel
+            refreshKey={takingsKey}
+            rate={rate}
+            unit={unit}
+            onRepeat={repeat}
+          />
         </section>
       )}
 

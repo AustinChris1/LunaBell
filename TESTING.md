@@ -40,7 +40,7 @@ Nothing here needs NIM. The app runs in any browser in web preview.
 | 4 | Read the two receipt cards | Left is frozen at 14,864. Right climbs every 5s, read live from mainnet |
 | 5 | Toggle the theme (header) | Light, dark, system. Whole page recolours, both pages agree |
 | 6 | Reload | Theme persists. No white flash before paint |
-| 7 | Click **Open LunaBell** | `/app`, the Mini App |
+| 7 | Click **Open in browser** | `/app`, the Mini App |
 | 8 | Type an amount on the pad | Big figure, luna count, live fiat conversion |
 | 9 | Switch the unit chips to USD | You now type dollars; NIM equivalent shown below |
 | 10 | Paste any NQ address into **Pay to** | Groups itself IBAN style, identicon appears |
@@ -112,10 +112,10 @@ Opening `/` inside Nimiq Pay forwards to `/app` automatically.
 
 ## Known gaps
 
-- **No real payment has been put through it yet.** The matcher is proven against
-  real mainnet transaction shapes and synthetic tagged ones, but the full loop
-  needs one real tagged transfer.
 - **NIM only.** USDT is not implemented. Rules allow NIM alone and it carries the
-  bonus, but it is a deliberate cut, not a finished feature.
+  bonus. That is a deliberate cut, not an unfinished feature.
 - Speech depends on the browser's voices. Some Android builds have no voice for a
   given locale; the chime and the visual confirmation still fire.
+- The Mini App SDK has no transaction watch or lookup. Matching is done through a
+  public Nimiq RPC, gated by `isConsensusEstablished()`. LunaBell does not claim
+  to be a light client.
